@@ -1,65 +1,184 @@
 <html>
   <body>
-    <div style="
-  max-width: 360px;
-  margin: 10px auto;
-  padding: 8px;
-  background: #111827;
-  border: 1px solid #263244;
-  border-radius: 16px;
-  font-family: Arial, 'Noto Sans Thai', sans-serif;
-  box-sizing: border-box;
+ <div style="
+  max-width:420px;
+  margin:16px auto;
+  background:#0f172a;
+  border:1px solid #263244;
+  border-radius:16px;
+  overflow:hidden;
+  font-family:Arial,'Noto Sans Thai',sans-serif;
+">
+
+  <!-- TOP BAR -->
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    padding:8px;
+    background:#0b0f19;
+    border-bottom:1px solid #263244;
+  ">
+
+    <div style="display:flex;gap:6px;">
+
+      <button
+        id="previewBtn"
+        onclick="showThamPreview()"
+        style="
+          border:0;
+          border-radius:7px;
+          padding:7px 12px;
+          background:#fff;
+          color:#111;
+          font-size:10px;
+          font-weight:bold;
+          cursor:pointer;
+        "
+      >
+        PREVIEW
+      </button>
+
+      <button
+        id="codeBtn"
+        onclick="showThamCode()"
+        style="
+          border:1px solid #374151;
+          border-radius:7px;
+          padding:7px 12px;
+          background:#1f2937;
+          color:#94a3b8;
+          font-size:10px;
+          font-weight:bold;
+          cursor:pointer;
+        "
+      >
+        CODE
+      </button>
+
+    </div>
+
+
+    <button
+      id="copyBtn"
+      onclick="copyThamCode()"
+      style="
+        display:none;
+        border:1px solid #374151;
+        background:#1f2937;
+        color:#fff;
+        border-radius:7px;
+        padding:7px 10px;
+        font-size:9px;
+        font-weight:bold;
+        cursor:pointer;
+      "
+    >
+      COPY CODE
+    </button>
+
+  </div>
+
+
+  <!-- PREVIEW -->
+  <div
+    id="thamPreview"
+    style="
+      padding:14px;
+      background:#111827;
+    "
+  ></div>
+
+
+  <!-- CODE -->
+  <textarea
+    id="thamCode"
+    readonly
+    spellcheck="false"
+    style="
+      display:none;
+      width:100%;
+      height:360px;
+      padding:14px;
+      box-sizing:border-box;
+      resize:vertical;
+      border:0;
+      outline:0;
+      background:#111827;
+      color:#e5e7eb;
+      font-family:Consolas,Monaco,monospace;
+      font-size:10px;
+      line-height:1.6;
+      white-space:pre;
+    "
+  ></textarea>
+
+</div>
+
+
+<script>
+
+const thamTemplate = `<div style="
+  max-width:360px;
+  margin:10px auto;
+  padding:8px;
+  background:#111827;
+  border:1px solid #263244;
+  border-radius:16px;
+  font-family:Arial,'Noto Sans Thai',sans-serif;
+  box-sizing:border-box;
 ">
 
   <div style="
-    background: #f3f3f1;
-    color: #111;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0,0,0,.3);
+    background:#f3f3f1;
+    color:#111;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
   ">
 
     <!-- HEADER -->
+
     <div style="
-      background: #101010;
-      color: #fff;
-      text-align: center;
-      padding: 11px 10px;
-      letter-spacing: 3px;
-      font-size: 10px;
-      font-weight: bold;
+      background:#101010;
+      color:#fff;
+      text-align:center;
+      padding:11px 10px;
+      letter-spacing:3px;
+      font-size:10px;
+      font-weight:bold;
     ">
       THAM / PERSONAL FILE / 001
     </div>
 
+
     <!-- SCROLL AREA -->
+
     <div style="
-      max-height: 280px;
-      overflow-y: auto;
-      padding: 14px;
-      box-sizing: border-box;
+      max-height:280px;
+      overflow-y:auto;
+      padding:14px;
+      box-sizing:border-box;
     ">
 
-      <!-- PERSONAL DATA -->
-
       <div style="
-        font-size: 9px;
-        letter-spacing: 3px;
-        color: #555;
-        font-weight: bold;
-        margin-bottom: 7px;
+        font-size:9px;
+        letter-spacing:3px;
+        color:#555;
+        font-weight:bold;
+        margin-bottom:7px;
       ">
         PERSONAL DATA
       </div>
 
       <div style="
-        height: 1px;
-        background: #555;
-        margin-bottom: 10px;
+        height:1px;
+        background:#555;
+        margin-bottom:10px;
       "></div>
 
 
-      <!-- ROW -->
       <div style="
         display:flex;
         justify-content:space-between;
@@ -131,6 +250,7 @@
         font-size:11px;
       ">
         <b>บุคลิก</b>
+
         <span style="text-align:right;">
           ขี้อ้อน · ขี้งอน · ชอบอ่อย
         </span>
@@ -148,6 +268,7 @@
         font-size:11px;
       ">
         <b>จุดอ่อน</b>
+
         <span style="text-align:right;">
           คนที่ทำเป็นไม่สนใจเขา
         </span>
@@ -161,8 +282,7 @@
         letter-spacing:3px;
         color:#555;
         font-weight:bold;
-        margin-bottom:7px;
-        margin-top:14px;
+        margin:14px 0 7px;
       ">
         BACKGROUND
       </div>
@@ -216,12 +336,12 @@
         CONFIDENTIAL
       </div>
 
+
       <div style="
         text-align:center;
         font-size:8px;
         color:#777;
-        margin-top:8px;
-        margin-bottom:5px;
+        margin:8px 0 5px;
         letter-spacing:1px;
       ">
         SOME INFORMATION WILL BE REVEALED DURING THE STORY
@@ -231,6 +351,7 @@
 
 
     <!-- SCROLL HINT -->
+
     <div style="
       background:#ddd;
       text-align:center;
@@ -243,6 +364,87 @@
     </div>
 
   </div>
-</div>
+
+</div>`;
+
+
+/* Render Preview */
+
+const preview = document.getElementById("thamPreview");
+const code = document.getElementById("thamCode");
+
+preview.innerHTML = thamTemplate;
+code.value = thamTemplate;
+
+
+/* PREVIEW TAB */
+
+function showThamPreview(){
+
+  preview.style.display = "block";
+  code.style.display = "none";
+
+  document.getElementById("copyBtn").style.display = "none";
+
+  document.getElementById("previewBtn").style.background = "#fff";
+  document.getElementById("previewBtn").style.color = "#111";
+
+  document.getElementById("codeBtn").style.background = "#1f2937";
+  document.getElementById("codeBtn").style.color = "#94a3b8";
+
+}
+
+
+/* CODE TAB */
+
+function showThamCode(){
+
+  preview.style.display = "none";
+  code.style.display = "block";
+
+  document.getElementById("copyBtn").style.display = "block";
+
+  document.getElementById("codeBtn").style.background = "#fff";
+  document.getElementById("codeBtn").style.color = "#111";
+
+  document.getElementById("previewBtn").style.background = "#1f2937";
+  document.getElementById("previewBtn").style.color = "#94a3b8";
+
+}
+
+
+/* COPY */
+
+async function copyThamCode(){
+
+  const button = document.getElementById("copyBtn");
+
+  try {
+
+    await navigator.clipboard.writeText(thamTemplate);
+
+    button.innerText = "COPIED ✓";
+
+    setTimeout(() => {
+      button.innerText = "COPY CODE";
+    },1500);
+
+  } catch(e){
+
+    code.select();
+
+    document.execCommand("copy");
+
+    button.innerText = "COPIED ✓";
+
+    setTimeout(() => {
+      button.innerText = "COPY CODE";
+    },1500);
+
+  }
+
+}
+
+</script>
   </body>
 </html>
