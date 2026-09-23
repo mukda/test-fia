@@ -250,5 +250,231 @@
 
   </div>
 </div>
+<br>
+    <style>
+.rose-card{
+  max-width:380px;
+  margin:14px auto;
+  padding:1px;
+  border-radius:20px;
+  background:linear-gradient(120deg,#ffb7c7,#7d3146,#f6d6dd,#a84661);
+  background-size:300% 300%;
+  animation:roseBorder 7s ease infinite;
+  font-family:Arial,'Noto Sans Thai',sans-serif;
+  box-shadow:0 14px 35px rgba(83,25,43,.25);
+}
+
+.rose-inner{
+  position:relative;
+  overflow:hidden;
+  border-radius:19px;
+  background:linear-gradient(160deg,#fff7f8,#f5e6e9);
+  color:#382229;
+}
+
+.rose-glow{
+  position:absolute;
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:rgba(255,155,180,.2);
+  filter:blur(35px);
+  top:-55px;
+  right:-45px;
+  animation:roseGlow 5s ease-in-out infinite;
+}
+
+.rose-header{
+  position:relative;
+  padding:17px;
+  z-index:2;
+}
+
+.rose-small{
+  font-size:8px;
+  letter-spacing:4px;
+  color:#9c6170;
+}
+
+.rose-name{
+  font-size:29px;
+  font-weight:900;
+  margin-top:4px;
+  background:linear-gradient(90deg,#4c202d,#b14f69,#4c202d);
+  background-size:200%;
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  animation:roseText 4s linear infinite;
+}
+
+.rose-sub{
+  margin-top:2px;
+  font-size:10px;
+  color:#8e6872;
+}
+
+.rose-heart{
+  position:absolute;
+  font-size:10px;
+  color:#c25d76;
+  opacity:.6;
+  animation:roseFloat 4s ease-in-out infinite;
+}
+
+.rose-h1{top:20px;right:22px;}
+.rose-h2{top:55px;right:48px;animation-delay:1s;}
+.rose-h3{top:36px;right:78px;animation-delay:2s;}
+
+.rose-quote{
+  margin:0 14px 12px;
+  padding:11px 13px;
+  background:rgba(255,255,255,.66);
+  border:1px solid rgba(168,73,96,.13);
+  border-radius:13px;
+  font-size:11px;
+  line-height:1.7;
+  box-shadow:0 5px 15px rgba(103,47,61,.07);
+  position:relative;
+  overflow:hidden;
+}
+
+.rose-quote:after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+  animation:roseSweep 5s linear infinite;
+}
+
+.rose-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  padding:0 14px 13px;
+}
+
+.rose-tag{
+  font-size:9px;
+  padding:5px 9px;
+  border-radius:20px;
+  color:#753549;
+  background:#f8dce3;
+  border:1px solid #efc3ce;
+  animation:roseTag 3s ease-in-out infinite;
+}
+
+.rose-tag:nth-child(2){animation-delay:.3s;}
+.rose-tag:nth-child(3){animation-delay:.6s;}
+
+.rose-story{
+  margin:0 14px 14px;
+  max-height:115px;
+  overflow-y:auto;
+  padding:11px;
+  border-radius:12px;
+  background:#fffafa;
+  border-left:3px solid #a84760;
+  font-size:10px;
+  line-height:1.8;
+}
+
+.rose-button{
+  margin:0 14px 15px;
+  padding:10px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(135deg,#b4516b,#793248);
+  border-radius:30px;
+  font-size:9px;
+  letter-spacing:2px;
+  box-shadow:0 8px 18px rgba(125,49,70,.25);
+  animation:rosePulse 2.8s ease-in-out infinite;
+}
+
+@keyframes roseBorder{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@keyframes roseGlow{
+  0%,100%{transform:scale(1);opacity:.65}
+  50%{transform:scale(1.25);opacity:1}
+}
+
+@keyframes roseText{
+  from{background-position:0%}
+  to{background-position:200%}
+}
+
+@keyframes roseFloat{
+  0%,100%{transform:translateY(0) rotate(0);opacity:.4}
+  50%{transform:translateY(-8px) rotate(8deg);opacity:.9}
+}
+
+@keyframes roseSweep{
+  from{left:-100%}
+  to{left:150%}
+}
+
+@keyframes roseTag{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+
+@keyframes rosePulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.015)}
+}
+</style>
+
+<div class="rose-card">
+  <div class="rose-inner">
+
+    <div class="rose-glow"></div>
+
+    <span class="rose-heart rose-h1">♥</span>
+    <span class="rose-heart rose-h2">♡</span>
+    <span class="rose-heart rose-h3">✦</span>
+
+    <div class="rose-header">
+      <div class="rose-small">ROMANCE ROUTE / 001</div>
+      <div class="rose-name">ธาม</div>
+      <div class="rose-sub">33 · Chemistry Lecturer · Sweet Type</div>
+    </div>
+
+    <div class="rose-quote">
+      “ถ้าเราจำเธอไม่ได้จริง ๆ...
+      <br>
+      งั้นขอทำความรู้จักใหม่ได้ไหม?”
+    </div>
+
+    <div class="rose-tags">
+      <span class="rose-tag">ขี้อ้อน</span>
+      <span class="rose-tag">แอบหึง</span>
+      <span class="rose-tag">ชอบอ่อย</span>
+    </div>
+
+    <div class="rose-story">
+      ครั้งหนึ่งคุณเคยแอบรักเขา
+      โดยที่เจ้าตัวไม่เคยรู้
+      <br><br>
+      หลายปีต่อมาโชคชะตาพาคุณกลับมาเจอกันอีกครั้ง
+      <br><br>
+      แต่ครั้งนี้...
+      <b>คนที่อาจตกหลุมรักก่อน อาจไม่ใช่คุณ</b>
+    </div>
+
+    <div class="rose-button">
+      ♡ ENTER HIS ROUTE
+    </div>
+
+  </div>
+</div>
+    
   </body>
 </html>
