@@ -1,0 +1,569 @@
+<html>
+  <body>
+    <style>
+  .bmcfx-wrap{
+    max-width:390px;
+    margin:16px auto;
+    padding:1.5px;
+    border-radius:22px;
+    background:linear-gradient(130deg,#ffb7c8,#7d3048,#1f2430,#f5d0da);
+    background-size:300% 300%;
+    animation:bmcfx-borderFlow 8s ease infinite;
+    box-shadow:0 14px 35px rgba(0,0,0,.28);
+    font-family:Arial,'Noto Sans Thai',sans-serif;
+    position:relative;
+  }
+
+  .bmcfx-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:21px;
+    background:linear-gradient(180deg,#171a21 0%,#111318 100%);
+    color:#f3f4f6;
+  }
+
+  .bmcfx-card::before{
+    content:"";
+    position:absolute;
+    inset:-30% -20%;
+    background:radial-gradient(circle at top right,rgba(255,183,200,.12),transparent 35%),
+               radial-gradient(circle at bottom left,rgba(255,255,255,.05),transparent 28%);
+    pointer-events:none;
+  }
+
+  .bmcfx-spark{
+    position:absolute;
+    color:rgba(255,215,224,.8);
+    font-size:11px;
+    animation:bmcfx-floatSpark 4.5s ease-in-out infinite;
+    pointer-events:none;
+  }
+
+  .bmcfx-spark.s1{top:16px;right:18px;animation-delay:0s;}
+  .bmcfx-spark.s2{top:72px;left:18px;font-size:9px;animation-delay:1.2s;}
+  .bmcfx-spark.s3{bottom:88px;right:28px;font-size:10px;animation-delay:2.1s;}
+
+  .bmcfx-top{
+    position:relative;
+    z-index:2;
+    padding:12px 14px 8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+
+  .bmcfx-top span{
+    font-size:8px;
+    letter-spacing:3px;
+    color:#f8d7df;
+  }
+
+  .bmcfx-badge{
+    font-size:8px;
+    padding:4px 8px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    color:#fddbe3;
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(4px);
+  }
+
+  .bmcfx-hero{
+    position:relative;
+    z-index:2;
+    padding:16px 16px 12px;
+    background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,183,200,.06));
+  }
+
+  .bmcfx-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .bmcfx-avatar{
+    width:62px;
+    height:62px;
+    min-width:62px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#ffdbe4,#8d3d53);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:800;
+    color:#1a1a1a;
+    box-shadow:
+      0 0 0 3px rgba(255,255,255,.08),
+      0 8px 20px rgba(141,61,83,.35);
+    animation:bmcfx-floatAvatar 3.8s ease-in-out infinite;
+  }
+
+  .bmcfx-name{
+    font-size:25px;
+    font-weight:800;
+    line-height:1.1;
+    background:linear-gradient(90deg,#ffffff,#ffd6df,#ffffff);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:bmcfx-shineText 3.8s linear infinite;
+  }
+
+  .bmcfx-sub{
+    font-size:10px;
+    color:#d1d5db;
+    letter-spacing:1px;
+    margin-top:3px;
+  }
+
+  .bmcfx-job{
+    font-size:11px;
+    color:#f7e7ec;
+    margin-top:4px;
+  }
+
+  .bmcfx-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:12px;
+  }
+
+  .bmcfx-tag{
+    padding:4px 9px;
+    border-radius:999px;
+    font-size:9px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+    color:#fff;
+    backdrop-filter:blur(4px);
+    animation:bmcfx-softPulse 3.4s ease-in-out infinite;
+  }
+
+  .bmcfx-tag:nth-child(2){animation-delay:.4s;}
+  .bmcfx-tag:nth-child(3){animation-delay:.8s;}
+  .bmcfx-tag:nth-child(4){animation-delay:1.2s;}
+
+  .bmcfx-quote{
+    position:relative;
+    z-index:2;
+    margin:0 14px 12px;
+    padding:11px 12px;
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    color:#fbeef2;
+    font-size:11px;
+    line-height:1.7;
+    font-style:italic;
+    overflow:hidden;
+    backdrop-filter:blur(6px);
+  }
+
+  .bmcfx-quote::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+    transform:skewX(-20deg);
+    animation:bmcfx-sweep 4.8s linear infinite;
+  }
+
+  .bmcfx-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    padding:0 14px 14px;
+  }
+
+  .bmcfx-mini{
+    padding:10px;
+    border-radius:13px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(6px);
+  }
+
+  .bmcfx-mini-label{
+    font-size:8px;
+    color:#f2c8d3;
+    letter-spacing:1px;
+    margin-bottom:4px;
+  }
+
+  .bmcfx-mini-value{
+    font-size:11px;
+    font-weight:700;
+    color:#fff;
+    line-height:1.5;
+  }
+
+  .bmcfx-section{
+    position:relative;
+    z-index:2;
+    padding:0 14px 14px;
+  }
+
+  .bmcfx-section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+  }
+
+  .bmcfx-section-title span{
+    font-size:8px;
+    letter-spacing:3px;
+    color:#f1cad4;
+  }
+
+  .bmcfx-locked{
+    font-size:8px;
+    color:#ffafc2;
+  }
+
+  .bmcfx-story{
+    max-height:128px;
+    overflow-y:auto;
+    padding:11px 12px;
+    border-radius:14px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    color:#ececec;
+    font-size:10px;
+    line-height:1.8;
+    box-sizing:border-box;
+    backdrop-filter:blur(6px);
+  }
+
+  .bmcfx-story::-webkit-scrollbar{
+    width:6px;
+  }
+
+  .bmcfx-story::-webkit-scrollbar-thumb{
+    background:#8d3d53;
+    border-radius:10px;
+  }
+
+  .bmcfx-meter-wrap{
+    padding:0 14px 14px;
+    position:relative;
+    z-index:2;
+  }
+
+  .bmcfx-meter-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:8px;
+    color:#f2c8d3;
+    letter-spacing:1px;
+    margin-bottom:7px;
+  }
+
+  .bmcfx-meter{
+    height:7px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    overflow:hidden;
+  }
+
+  .bmcfx-meter-fill{
+    width:28%;
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(90deg,#ffcad7,#8d3d53);
+    box-shadow:0 0 15px rgba(255,182,193,.45);
+    animation:bmcfx-fillGlow 2.8s ease-in-out infinite;
+  }
+
+  .bmcfx-chat{
+    position:relative;
+    z-index:2;
+    margin:0 14px 14px;
+    padding:12px;
+    border-radius:15px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+  }
+
+  .bmcfx-bubble-left,
+  .bmcfx-bubble-right{
+    max-width:80%;
+    padding:9px 10px;
+    font-size:10px;
+    line-height:1.6;
+    margin-bottom:8px;
+  }
+
+  .bmcfx-bubble-left{
+    background:#fff;
+    color:#222;
+    border-radius:6px 13px 13px 13px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .bmcfx-bubble-right{
+    margin-left:auto;
+    background:linear-gradient(135deg,#8d3d53,#5f2638);
+    color:#fff;
+    border-radius:13px 6px 13px 13px;
+    box-shadow:0 8px 16px rgba(95,38,56,.28);
+  }
+
+  .bmcfx-typing{
+    display:flex;
+    gap:5px;
+    align-items:center;
+    margin-top:2px;
+    padding-left:2px;
+  }
+
+  .bmcfx-typing span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#f5c8d4;
+    display:inline-block;
+    animation:bmcfx-typing 1.2s infinite ease-in-out;
+  }
+
+  .bmcfx-typing span:nth-child(2){animation-delay:.2s;}
+  .bmcfx-typing span:nth-child(3){animation-delay:.4s;}
+
+  .bmcfx-cta{
+    position:relative;
+    z-index:2;
+    padding:0 14px 16px;
+  }
+
+  .bmcfx-btn{
+    position:relative;
+    overflow:hidden;
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    padding:11px 14px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#a44963,#6d2e42);
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:2px;
+    box-shadow:0 10px 22px rgba(141,61,83,.28);
+    animation:bmcfx-btnPulse 2.8s ease-in-out infinite;
+  }
+
+  .bmcfx-btn::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+    transform:skewX(-24deg);
+    animation:bmcfx-btnSweep 3.8s linear infinite;
+  }
+
+  .bmcfx-foot{
+    text-align:center;
+    padding:0 14px 15px;
+    font-size:8px;
+    color:#c7c7c7;
+    letter-spacing:1px;
+    position:relative;
+    z-index:2;
+  }
+
+  @keyframes bmcfx-borderFlow{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+
+  @keyframes bmcfx-shineText{
+    0%{background-position:0% center;}
+    100%{background-position:200% center;}
+  }
+
+  @keyframes bmcfx-sweep{
+    0%{left:-120%;}
+    100%{left:140%;}
+  }
+
+  @keyframes bmcfx-btnSweep{
+    0%{left:-120%;}
+    100%{left:150%;}
+  }
+
+  @keyframes bmcfx-softPulse{
+    0%,100%{transform:translateY(0);opacity:.95;}
+    50%{transform:translateY(-1px);opacity:1;}
+  }
+
+  @keyframes bmcfx-floatAvatar{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-4px);}
+  }
+
+  @keyframes bmcfx-floatSpark{
+    0%,100%{transform:translateY(0) scale(1);opacity:.55;}
+    50%{transform:translateY(-6px) scale(1.08);opacity:1;}
+  }
+
+  @keyframes bmcfx-fillGlow{
+    0%,100%{box-shadow:0 0 12px rgba(255,182,193,.35);}
+    50%{box-shadow:0 0 18px rgba(255,182,193,.6);}
+  }
+
+  @keyframes bmcfx-btnPulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.02);}
+  }
+
+  @keyframes bmcfx-typing{
+    0%,80%,100%{transform:scale(.8);opacity:.45;}
+    40%{transform:scale(1);opacity:1;}
+  }
+</style>
+
+<div class="bmcfx-wrap">
+  <div class="bmcfx-card">
+
+    <span class="bmcfx-spark s1">✦</span>
+    <span class="bmcfx-spark s2">✧</span>
+    <span class="bmcfx-spark s3">✦</span>
+
+    <div class="bmcfx-top">
+      <span>CHARACTER FILE</span>
+      <div class="bmcfx-badge">NO.001</div>
+    </div>
+
+    <div class="bmcfx-hero">
+      <div class="bmcfx-row">
+        <div class="bmcfx-avatar">T</div>
+
+        <div>
+          <div class="bmcfx-name">ธาม</div>
+          <div class="bmcfx-sub">THAM · 33 YEARS OLD</div>
+          <div class="bmcfx-job">อาจารย์ภาควิชาเคมี</div>
+        </div>
+      </div>
+
+      <div class="bmcfx-tags">
+        <span class="bmcfx-tag">ขี้อ้อน</span>
+        <span class="bmcfx-tag">ขี้งอน</span>
+        <span class="bmcfx-tag">ชอบอ่อย</span>
+        <span class="bmcfx-tag">Puppy Eyes</span>
+      </div>
+    </div>
+
+    <div class="bmcfx-quote">
+      “เราเคยรู้จักกันมาก่อนเหรอ...?”
+    </div>
+
+    <div class="bmcfx-grid">
+      <div class="bmcfx-mini">
+        <div class="bmcfx-mini-label">STATUS</div>
+        <div class="bmcfx-mini-value">โสด</div>
+      </div>
+
+      <div class="bmcfx-mini">
+        <div class="bmcfx-mini-label">TYPE</div>
+        <div class="bmcfx-mini-value">สายหวาน</div>
+      </div>
+
+      <div class="bmcfx-mini">
+        <div class="bmcfx-mini-label">WEAKNESS</div>
+        <div class="bmcfx-mini-value">คนที่เมินเขา</div>
+      </div>
+
+      <div class="bmcfx-mini">
+        <div class="bmcfx-mini-label">DANGER</div>
+        <div class="bmcfx-mini-value" style="color:#ffc7d6;">เวลาเริ่มหึง</div>
+      </div>
+    </div>
+
+    <div class="bmcfx-section">
+      <div class="bmcfx-section-title">
+        <span>BACKGROUND</span>
+        <div class="bmcfx-locked">CONFIDENTIAL</div>
+      </div>
+
+      <div class="bmcfx-story">
+        คุณกับธามเคยเป็นเพื่อนร่วมชั้นกันในสมัยมหาวิทยาลัย
+
+        <br><br>
+
+        ในตอนนั้น เขาเป็นคนที่อยู่ใกล้คุณมากพอให้แอบมอง
+        แต่ไกลเกินกว่าจะเอื้อมถึง
+
+        <br><br>
+
+        หลายปีหลังจากต่างคนต่างแยกย้ายกันไปใช้ชีวิต
+        คุณกลับมาเจอกับเขาอีกครั้งโดยบังเอิญ
+
+        <br><br>
+
+        ในคืนที่ธามกำลังพยายามทำเหมือนตัวเองไม่เป็นอะไร
+        หลังผ่านเรื่องบางอย่างมา
+
+        <br><br>
+
+        และสิ่งที่เจ็บที่สุดก็คือ...
+
+        <br><br>
+
+        <b style="color:#fff;">เขาจำคุณไม่ได้เลย</b>
+      </div>
+    </div>
+
+    <div class="bmcfx-meter-wrap">
+      <div class="bmcfx-meter-label">
+        <span>RELATIONSHIP PROGRESS</span>
+        <span>28%</span>
+      </div>
+
+      <div class="bmcfx-meter">
+        <div class="bmcfx-meter-fill"></div>
+      </div>
+    </div>
+
+    <div class="bmcfx-chat">
+      <div class="bmcfx-bubble-left">
+        เราเคยรู้จักกันมาก่อนเหรอ?
+      </div>
+
+      <div class="bmcfx-bubble-right">
+        เคยสิ...แต่นายคงจำไม่ได้หรอก
+      </div>
+
+      <div class="bmcfx-bubble-left" style="margin-bottom:6px;">
+        งั้นช่วยทำให้เราจำได้หน่อยสิ
+      </div>
+
+      <div class="bmcfx-typing">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="bmcfx-cta">
+      <a href="#" class="bmcfx-btn">START CHAT</a>
+    </div>
+
+    <div class="bmcfx-foot">
+      SOME SECRETS CAN ONLY BE UNLOCKED THROUGH CONVERSATION
+    </div>
+
+  </div>
+</div>
+  </body>
+</html>
